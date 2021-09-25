@@ -21,8 +21,8 @@ const listAll = async (event, context, callback) => {
 
 const insert = async (event, context, callback) => {
     try {
-        let body = event.body
-
+        let body = JSON.parse(event.body)
+        console.log(event);
         const funcionarios = await Funcionario.create(body)
         return {
             statusCode: status.SUCCESS,
@@ -42,9 +42,8 @@ const insert = async (event, context, callback) => {
 
 const remove = async (event, context, callback) => {
     try {
-        let {
-            id
-        } = event.body
+        let id = event.pathParameters.id
+        console.log(event.pathParameters)
         const funcionarios = await Funcionario.destroy({
             where: {
                 id
@@ -67,7 +66,7 @@ const remove = async (event, context, callback) => {
 
 const update = async (event, context, callback) => {
     try {
-        const body = event.body;
+        const body = JSON.parse(event.body)
         const {
             id
         } = body
@@ -80,7 +79,7 @@ const update = async (event, context, callback) => {
         return {
             statusCode: status.SUCCESS,
             body: JSON.stringify({
-                message: "Atualixado com sucesso",
+                message: "Atualizado com sucesso",
                 response: funcionarios,
             }),
         };

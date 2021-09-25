@@ -64,3 +64,24 @@ functions:
           path: funcionarios
           method: post
 
+  listAllFuncionario:
+    handler: src/controllers/Funcionario.listAll
+    events:
+      - http:
+          path: funcionarios
+          method: get
+
+  removeFuncionario:
+    handler: src/controllers/Funcionario.remove
+    events:
+      - http:
+          path: funcionarios/{id}
+          method: delete
+
+  updateFuncionario:
+    handler: src/controllers/Funcionario.update
+    events:
+      - http:
+          path: funcionarios
+          method: put
+

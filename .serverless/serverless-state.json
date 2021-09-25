@@ -107,6 +107,24 @@
               "LogGroupName": "/aws/lambda/my-api-dev-insertFuncionario"
             }
           },
+          "ListAllFuncionarioLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/my-api-dev-listAllFuncionario"
+            }
+          },
+          "RemoveFuncionarioLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/my-api-dev-removeFuncionario"
+            }
+          },
+          "UpdateFuncionarioLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/my-api-dev-updateFuncionario"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -230,6 +248,24 @@
                               "InsertFuncionarioLogGroup",
                               "Arn"
                             ]
+                          },
+                          {
+                            "Fn::GetAtt": [
+                              "ListAllFuncionarioLogGroup",
+                              "Arn"
+                            ]
+                          },
+                          {
+                            "Fn::GetAtt": [
+                              "RemoveFuncionarioLogGroup",
+                              "Arn"
+                            ]
+                          },
+                          {
+                            "Fn::GetAtt": [
+                              "UpdateFuncionarioLogGroup",
+                              "Arn"
+                            ]
                           }
                         ]
                       }
@@ -246,7 +282,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/my-api/dev/1632593022180-2021-09-25T18:03:42.180Z/my-api.zip"
+                "S3Key": "serverless/my-api/dev/1632596328617-2021-09-25T18:58:48.617Z/my-api.zip"
               },
               "Handler": "s_hello.handler",
               "Runtime": "nodejs12.x",
@@ -271,7 +307,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/my-api/dev/1632593022180-2021-09-25T18:03:42.180Z/my-api.zip"
+                "S3Key": "serverless/my-api/dev/1632596328617-2021-09-25T18:58:48.617Z/my-api.zip"
               },
               "Handler": "s_insertFuncionario.handler",
               "Runtime": "nodejs12.x",
@@ -289,24 +325,129 @@
               "InsertFuncionarioLogGroup"
             ]
           },
-          "HelloLambdaVersiontgvxBIJfcHofWa2NTheYuJ7g1M6tCTtH9IWa6xtSfk": {
+          "ListAllFuncionarioLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/my-api/dev/1632596328617-2021-09-25T18:58:48.617Z/my-api.zip"
+              },
+              "Handler": "s_listAllFuncionario.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "my-api-dev-listAllFuncionario",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "ListAllFuncionarioLogGroup"
+            ]
+          },
+          "RemoveFuncionarioLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/my-api/dev/1632596328617-2021-09-25T18:58:48.617Z/my-api.zip"
+              },
+              "Handler": "s_removeFuncionario.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "my-api-dev-removeFuncionario",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "RemoveFuncionarioLogGroup"
+            ]
+          },
+          "UpdateFuncionarioLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/my-api/dev/1632596328617-2021-09-25T18:58:48.617Z/my-api.zip"
+              },
+              "Handler": "s_updateFuncionario.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "my-api-dev-updateFuncionario",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "UpdateFuncionarioLogGroup"
+            ]
+          },
+          "HelloLambdaVersionugt8P0wVIZhNneI450SHXrw3N2rHFpLJ9yfpka8g": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "OWZvqktapnyHBCpryCvsTLjpYpEWi12Ssflr5M4fNi8="
+              "CodeSha256": "iBNGkU1LqPzt2sMF1gAnFsYkAY0s6H4n7gsTHNzf28I="
             }
           },
-          "InsertFuncionarioLambdaVersionPx39glCBm22LSNqAzIvV5MBm4n7h9PAqckOPT7KI6Ys": {
+          "InsertFuncionarioLambdaVersiongjo3rLewN8ni4xFpcjNocA9fXVCPbfpc1QTaR61uo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "InsertFuncionarioLambdaFunction"
               },
-              "CodeSha256": "OWZvqktapnyHBCpryCvsTLjpYpEWi12Ssflr5M4fNi8="
+              "CodeSha256": "iBNGkU1LqPzt2sMF1gAnFsYkAY0s6H4n7gsTHNzf28I="
+            }
+          },
+          "ListAllFuncionarioLambdaVersionyE2sZvTHSbMSFGpih9W8zYYAiOojPrGLThES6I2oLaE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ListAllFuncionarioLambdaFunction"
+              },
+              "CodeSha256": "iBNGkU1LqPzt2sMF1gAnFsYkAY0s6H4n7gsTHNzf28I="
+            }
+          },
+          "RemoveFuncionarioLambdaVersionNzFOv2N9seanzhK25VLxTpd0keDk4LnzTwyHLxI": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "RemoveFuncionarioLambdaFunction"
+              },
+              "CodeSha256": "iBNGkU1LqPzt2sMF1gAnFsYkAY0s6H4n7gsTHNzf28I="
+            }
+          },
+          "UpdateFuncionarioLambdaVersionwDkDF2B0JFDl9cRFRBGhU3vgEuBe4G50NMAsl3yU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdateFuncionarioLambdaFunction"
+              },
+              "CodeSha256": "iBNGkU1LqPzt2sMF1gAnFsYkAY0s6H4n7gsTHNzf28I="
             }
           },
           "ApiGatewayRestApi": {
@@ -331,6 +472,18 @@
                 ]
               },
               "PathPart": "funcionarios",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceFuncionariosIdVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceFuncionarios"
+              },
+              "PathPart": "{id}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -382,7 +535,145 @@
               "InsertFuncionarioLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1632593013289": {
+          "ApiGatewayMethodFuncionariosGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceFuncionarios"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "ListAllFuncionarioLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "ListAllFuncionarioLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodFuncionariosIdVarDelete": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "DELETE",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceFuncionariosIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "RemoveFuncionarioLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "RemoveFuncionarioLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodFuncionariosPut": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PUT",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceFuncionarios"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "UpdateFuncionarioLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "UpdateFuncionarioLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayDeployment1632596320348": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -391,7 +682,10 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodFuncionariosPost"
+              "ApiGatewayMethodFuncionariosPost",
+              "ApiGatewayMethodFuncionariosGet",
+              "ApiGatewayMethodFuncionariosIdVarDelete",
+              "ApiGatewayMethodFuncionariosPut"
             ]
           },
           "InsertFuncionarioLambdaPermissionApiGateway": {
@@ -400,6 +694,117 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "InsertFuncionarioLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "ListAllFuncionarioLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ListAllFuncionarioLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "RemoveFuncionarioLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "RemoveFuncionarioLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "UpdateFuncionarioLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "UpdateFuncionarioLambdaFunction",
                   "Arn"
                 ]
               },
@@ -540,7 +945,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/my-api/dev/1632593022180-2021-09-25T18:03:42.180Z/custom-resources.zip"
+                "S3Key": "serverless/my-api/dev/1632596328617-2021-09-25T18:58:48.617Z/custom-resources.zip"
               },
               "FunctionName": "my-api-dev-custom-resource-apigw-cw-role",
               "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -578,6 +983,36 @@
               }
             }
           },
+          "CWLSubFilterListAllFuncionarioLogGroupUsEast1": {
+            "Type": "AWS::Logs::SubscriptionFilter",
+            "Properties": {
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:67a1ebd1-db6f-47f6-9961-249f24a766ce#z7Kc9klqNFmhf3hDMh#my-api#dev",
+              "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+              "LogGroupName": {
+                "Ref": "ListAllFuncionarioLogGroup"
+              }
+            }
+          },
+          "CWLSubFilterRemoveFuncionarioLogGroupUsEast1": {
+            "Type": "AWS::Logs::SubscriptionFilter",
+            "Properties": {
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:67a1ebd1-db6f-47f6-9961-249f24a766ce#z7Kc9klqNFmhf3hDMh#my-api#dev",
+              "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+              "LogGroupName": {
+                "Ref": "RemoveFuncionarioLogGroup"
+              }
+            }
+          },
+          "CWLSubFilterUpdateFuncionarioLogGroupUsEast1": {
+            "Type": "AWS::Logs::SubscriptionFilter",
+            "Properties": {
+              "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:67a1ebd1-db6f-47f6-9961-249f24a766ce#z7Kc9klqNFmhf3hDMh#my-api#dev",
+              "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
+              "LogGroupName": {
+                "Ref": "UpdateFuncionarioLogGroup"
+              }
+            }
+          },
           "CWLSubFilterApiGatewayLogGroupUsEast1": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
@@ -612,7 +1047,7 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersiontgvxBIJfcHofWa2NTheYuJ7g1M6tCTtH9IWa6xtSfk"
+              "Ref": "HelloLambdaVersionugt8P0wVIZhNneI450SHXrw3N2rHFpLJ9yfpka8g"
             },
             "Export": {
               "Name": "sls-my-api-dev-HelloLambdaFunctionQualifiedArn"
@@ -621,10 +1056,37 @@
           "InsertFuncionarioLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "InsertFuncionarioLambdaVersionPx39glCBm22LSNqAzIvV5MBm4n7h9PAqckOPT7KI6Ys"
+              "Ref": "InsertFuncionarioLambdaVersiongjo3rLewN8ni4xFpcjNocA9fXVCPbfpc1QTaR61uo"
             },
             "Export": {
               "Name": "sls-my-api-dev-InsertFuncionarioLambdaFunctionQualifiedArn"
+            }
+          },
+          "ListAllFuncionarioLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ListAllFuncionarioLambdaVersionyE2sZvTHSbMSFGpih9W8zYYAiOojPrGLThES6I2oLaE"
+            },
+            "Export": {
+              "Name": "sls-my-api-dev-ListAllFuncionarioLambdaFunctionQualifiedArn"
+            }
+          },
+          "RemoveFuncionarioLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "RemoveFuncionarioLambdaVersionNzFOv2N9seanzhK25VLxTpd0keDk4LnzTwyHLxI"
+            },
+            "Export": {
+              "Name": "sls-my-api-dev-RemoveFuncionarioLambdaFunctionQualifiedArn"
+            }
+          },
+          "UpdateFuncionarioLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdateFuncionarioLambdaVersionwDkDF2B0JFDl9cRFRBGhU3vgEuBe4G50NMAsl3yU"
+            },
+            "Export": {
+              "Name": "sls-my-api-dev-UpdateFuncionarioLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -755,7 +1217,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersiontgvxBIJfcHofWa2NTheYuJ7g1M6tCTtH9IWa6xtSfk"
+        "versionLogicalId": "HelloLambdaVersionugt8P0wVIZhNneI450SHXrw3N2rHFpLJ9yfpka8g"
       },
       "insertFuncionario": {
         "handler": "s_insertFuncionario.handler",
@@ -774,7 +1236,64 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "InsertFuncionarioLambdaVersionPx39glCBm22LSNqAzIvV5MBm4n7h9PAqckOPT7KI6Ys"
+        "versionLogicalId": "InsertFuncionarioLambdaVersiongjo3rLewN8ni4xFpcjNocA9fXVCPbfpc1QTaR61uo"
+      },
+      "listAllFuncionario": {
+        "handler": "s_listAllFuncionario.handler",
+        "events": [
+          {
+            "http": {
+              "path": "funcionarios",
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "my-api-dev-listAllFuncionario",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "ListAllFuncionarioLambdaVersionyE2sZvTHSbMSFGpih9W8zYYAiOojPrGLThES6I2oLaE"
+      },
+      "removeFuncionario": {
+        "handler": "s_removeFuncionario.handler",
+        "events": [
+          {
+            "http": {
+              "path": "funcionarios/{id}",
+              "method": "delete",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "my-api-dev-removeFuncionario",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "RemoveFuncionarioLambdaVersionNzFOv2N9seanzhK25VLxTpd0keDk4LnzTwyHLxI"
+      },
+      "updateFuncionario": {
+        "handler": "s_updateFuncionario.handler",
+        "events": [
+          {
+            "http": {
+              "path": "funcionarios",
+              "method": "put",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "my-api-dev-updateFuncionario",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "UpdateFuncionarioLambdaVersionwDkDF2B0JFDl9cRFRBGhU3vgEuBe4G50NMAsl3yU"
       }
     },
     "configValidationMode": "warn",
@@ -801,10 +1320,10 @@
     "isDashboardAppPreconfigured": true,
     "orgUid": "67a1ebd1-db6f-47f6-9961-249f24a766ce",
     "appUid": "z7Kc9klqNFmhf3hDMh",
-    "artifact": "C:\\Users\\User\\Documents\\projects\\my-api\\.serverless\\my-api.zip"
+    "artifact": "C:\\Users\\User\\Documents\\projects\\my-api-test\\.serverless\\my-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/my-api/dev/1632593022180-2021-09-25T18:03:42.180Z",
+    "artifactDirectoryName": "serverless/my-api/dev/1632596328617-2021-09-25T18:58:48.617Z",
     "artifact": "my-api.zip"
   }
 }
