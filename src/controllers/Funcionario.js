@@ -22,7 +22,8 @@ const listAll = async (event, context, callback) => {
 const insert = async (event, context, callback) => {
     try {
         let body = JSON.parse(event.body)
-        console.log(event);
+        body.id && delete body.id
+
         const funcionarios = await Funcionario.create(body)
         return {
             statusCode: status.SUCCESS,
@@ -32,7 +33,6 @@ const insert = async (event, context, callback) => {
             }),
         };
     } catch (error) {
-        console.log(error)
         return {
             statusCode: status.ERROR,
             body: error.message

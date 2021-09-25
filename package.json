@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "sequelize": "cd src\\database && sequelize db:create && sequelize db:migrate",
     "start": "node index.js",
     "deploy": "serverless deploy -v"
