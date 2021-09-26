@@ -23,7 +23,7 @@ const listAll = async (req) => {
     } catch(error){
         return {
             statusCode: status.ERROR,
-            body: error.message,
+            body: error,
         }
     }
 }
