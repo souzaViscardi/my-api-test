@@ -3,7 +3,16 @@ const status = require("../config/status");
 
 const listAll = async (req) => {
     try{
-        const funcionarios = await Funcionario.findAll();
+        let pagina, itensPorPagina;
+        
+        pagina = parseInt(req.query.pagina) || 0;
+        itensPorPagina = parseInt(req.query.itensPorPagina) || 100;
+        pagina = pagina == 0 ? pagina : pagina-1
+        console.log(pagina)
+        const funcionarios = await Funcionario.findAll({
+            offset: pagina * itensPorPagina,
+            limit: itensPorPagina
+        });
         return {
             statusCode: status.SUCCESS,
             body: {

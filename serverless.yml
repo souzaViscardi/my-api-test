@@ -50,8 +50,3 @@ functions:
       - http: 'PUT /funcionario/{proxy+}'
 
 
-  listAllFuncionariostest:
-    handler: index.handler
-    events:
-      - http: 'GET /funcionario'
-

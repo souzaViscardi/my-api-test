@@ -35,7 +35,7 @@ beforeEach(() => {
 
 test('Funcionario List All', async () => {
 
-    const response = await funcionarioController.listAll()
+    const response = await funcionarioController.listAll({query:{}})
 
     expect(typeof response).toBe('object');
     expect(response).toHaveProperty('body');
@@ -54,7 +54,7 @@ test('Funcionario List All', async () => {
       throw new Error("error");
     })
 
-    const response = await funcionarioController.listAll()
+    const response = await funcionarioController.listAll({query:{}})
 
     expect(typeof response).toBe('object');
     expect(response).toHaveProperty('body');
@@ -121,17 +121,72 @@ test('Funcionario List All', async () => {
 
   });
 
-  test.only('Funcionario UPDATE db error', async () => {
+  test('Funcionario UPDATE db error', async () => {
 
     Funcionario.update = jest.fn().mockImplementation(() => {
       throw new Error("error");
     })
 
-    const response = await funcionarioController.update();
+    const response = await funcionarioController.update({body: mocks.body, params: {id:1}});
 
     expect(typeof response).toBe('object');
     expect(response).toHaveProperty('body');
     expect(response.body).not.toBe("");
+    expect(response).toHaveProperty('statusCode');
+    expect(response.statusCode).toBe(400);
+
+  });
+
+  test('Funcionario UPDATE whithout id parameter', async () => {
+
+    const response = await funcionarioController.update({body: mocks.body, params: {id:undefined}});
+
+    expect(typeof response).toBe('object');
+    expect(response).toHaveProperty('body');
+    expect(response.body).toBe("Id do funcionario é obrigatorio");
+    expect(response).toHaveProperty('statusCode');
+    expect(response.statusCode).toBe(400);
+
+  });
+
+
+  test('Funcionario DELETE', async () => {
+
+    const response = await funcionarioController.remove({body: mocks.body, params: {id:1}})
+    
+    expect(typeof response).toBe('object');
+    expect(response).toHaveProperty('body');
+    expect(response.body).toHaveProperty('response');
+    expect(response.body).toHaveProperty('message');
+    expect(response.body).not.toBe("");
+    expect(response).toHaveProperty('statusCode');
+    expect(response.statusCode).toBe(200);
+
+  });
+
+  test('Funcionario DELETE db error', async () => {
+
+    Funcionario.destroy = jest.fn().mockImplementation(() => {
+      throw new Error("error");
+    })
+
+    const response = await funcionarioController.remove({body: mocks.body, params: {id:1}});
+
+    expect(typeof response).toBe('object');
+    expect(response).toHaveProperty('body');
+    expect(response.body).not.toBe("");
+    expect(response).toHaveProperty('statusCode');
+    expect(response.statusCode).toBe(400);
+
+  });
+
+  test('Funcionario DELETE whithout id parameter', async () => {
+
+    const response = await funcionarioController.remove({body: mocks.body, params: {id:undefined}});
+
+    expect(typeof response).toBe('object');
+    expect(response).toHaveProperty('body');
+    expect(response.body).toBe("Id do funcionario é obrigatorio");
     expect(response).toHaveProperty('statusCode');
     expect(response.statusCode).toBe(400);
 
