@@ -29,6 +29,8 @@ beforeEach(() => {
     Funcionario.findAll.mockClear()
     Funcionario.destroy.mockClear()
     Funcionario.update.mockClear()
+    Funcionario.create.mockClear()
+
   });
 
 test('Funcionario List All', async () => {
@@ -37,7 +39,8 @@ test('Funcionario List All', async () => {
 
     expect(typeof response).toBe('object');
     expect(response).toHaveProperty('body');
-    expect(typeof response.body).toBe("string");
+    expect(response.body).toHaveProperty('response');
+    expect(response.body).toHaveProperty('message');
     expect(response.body).not.toBe("");
     expect(response).toHaveProperty('statusCode');
     expect(response.statusCode).toBe(200);
@@ -55,7 +58,6 @@ test('Funcionario List All', async () => {
 
     expect(typeof response).toBe('object');
     expect(response).toHaveProperty('body');
-    expect(typeof response.body).toBe("string");
     expect(response.body).not.toBe("");
     expect(response).toHaveProperty('statusCode');
     expect(response.statusCode).toBe(400);
@@ -65,11 +67,12 @@ test('Funcionario List All', async () => {
 
   test('Funcionario INSERT', async () => {
 
-    const response = await funcionarioController.insert({body: mocks.body})
+    const response = await funcionarioController.create({body: mocks.body})
 
     expect(typeof response).toBe('object');
     expect(response).toHaveProperty('body');
-    expect(typeof response.body).toBe("string");
+    expect(response.body).toHaveProperty('response');
+    expect(response.body).toHaveProperty('message');
     expect(response.body).not.toBe("");
     expect(response).toHaveProperty('statusCode');
     expect(response.statusCode).toBe(200);
@@ -78,11 +81,10 @@ test('Funcionario List All', async () => {
 
   test('Funcionario INSERT without payload', async () => {
 
-    const response = await funcionarioController.insert()
+    const response = await funcionarioController.create()
 
     expect(typeof response).toBe('object');
     expect(response).toHaveProperty('body');
-    expect(typeof response.body).toBe("string");
     expect(response.body).not.toBe("");
     expect(response).toHaveProperty('statusCode');
     expect(response.statusCode).toBe(400)
@@ -95,11 +97,40 @@ test('Funcionario List All', async () => {
       throw new Error("error");
     })
 
-    const response = await funcionarioController.insert({body: mocks.body})
+    const response = await funcionarioController.create({body: mocks.body})
 
     expect(typeof response).toBe('object');
     expect(response).toHaveProperty('body');
-    expect(typeof response.body).toBe("string");
+    expect(response.body).not.toBe("");
+    expect(response).toHaveProperty('statusCode');
+    expect(response.statusCode).toBe(400);
+
+  });
+
+  test('Funcionario UPDATE', async () => {
+
+    const response = await funcionarioController.update({body: mocks.body, params: {id:1}})
+    
+    expect(typeof response).toBe('object');
+    expect(response).toHaveProperty('body');
+    expect(response.body).toHaveProperty('response');
+    expect(response.body).toHaveProperty('message');
+    expect(response.body).not.toBe("");
+    expect(response).toHaveProperty('statusCode');
+    expect(response.statusCode).toBe(200);
+
+  });
+
+  test.only('Funcionario UPDATE db error', async () => {
+
+    Funcionario.update = jest.fn().mockImplementation(() => {
+      throw new Error("error");
+    })
+
+    const response = await funcionarioController.update();
+
+    expect(typeof response).toBe('object');
+    expect(response).toHaveProperty('body');
     expect(response.body).not.toBe("");
     expect(response).toHaveProperty('statusCode');
     expect(response.statusCode).toBe(400);

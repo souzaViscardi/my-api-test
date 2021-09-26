@@ -25,12 +25,12 @@ const findAll = [{
     }
 }
 
-const body = `{
+const body = {
     "idade":50,
     "nome": "rodnei",
     "cargo": "faz tudo",
     "id":1
-}`
+}
 module.exports = {
     findAll,
     insert,

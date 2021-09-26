@@ -1,15 +1,15 @@
 const {Funcionario} = require('../models');
 const status = require("../config/status");
 
-const listAll = async (event, context, callback) => {
+const listAll = async (req) => {
     try{
         const funcionarios = await Funcionario.findAll();
         return {
             statusCode: status.SUCCESS,
-            body: JSON.stringify({
+            body: {
                 message: "Listado com sucesso",
                 response: funcionarios,
-            }),
+            },
         };
     } catch(error){
         return {
@@ -19,18 +19,18 @@ const listAll = async (event, context, callback) => {
     }
 }
 
-const insert = async (event, context, callback) => {
+const create = async (req) => {
     try {
-        let body = JSON.parse(event.body)
+        let body = req.body
         body.id && delete body.id
 
         const funcionarios = await Funcionario.create(body)
         return {
             statusCode: status.SUCCESS,
-            body: JSON.stringify({
+            body: {
                 message: "Inserido com sucesso",
                 response: funcionarios,
-            }),
+            },
         };
     } catch (error) {
         return {
@@ -40,10 +40,12 @@ const insert = async (event, context, callback) => {
     }
 }
 
-const remove = async (event, context, callback) => {
+const remove = async (req) => {
     try {
-        let id = event.pathParameters.id
-        console.log(event.pathParameters)
+        let {id} = req.params; 
+        if(isNaN(id)) 
+            throw new Error('Id do funcionario é obrigatorio');
+
         const funcionarios = await Funcionario.destroy({
             where: {
                 id
@@ -51,10 +53,10 @@ const remove = async (event, context, callback) => {
         })
         return {
             statusCode: status.SUCCESS,
-            body: JSON.stringify({
+            body: {
                 message: "Removido com sucesso",
                 response: funcionarios,
-            }),
+            },
         };
     } catch (error) {
         return {
@@ -64,13 +66,14 @@ const remove = async (event, context, callback) => {
     }
 }
 
-const update = async (event, context, callback) => {
+const update = async (req) => {
     try {
-        const body = JSON.parse(event.body)
-        const {
-            id
-        } = body
-        delete body.id
+        const body = req.body
+        const {id} = req.params; 
+
+        if(isNaN(id)) 
+            throw new Error('Id do funcionario é obrigatorio');
+
         const funcionarios = await Funcionario.update(body, {
             where: {
                 id
@@ -78,10 +81,10 @@ const update = async (event, context, callback) => {
         });
         return {
             statusCode: status.SUCCESS,
-            body: JSON.stringify({
+            body: {
                 message: "Atualizado com sucesso",
                 response: funcionarios,
-            }),
+            },
         };
     } catch (error) {
         return {
@@ -93,7 +96,7 @@ const update = async (event, context, callback) => {
 
 module.exports = {
     listAll,
-    insert,
+    create,
     remove,
     update
 }

@@ -1,9 +1,10 @@
 
 
-service: my-api
+service: my-express-api
 app: my-aws-node-express-api-app
 org: kevinguitars
-
+plugins:
+  - serverless-offline
 frameworkVersion: '2'
 useDotenv: true
 
@@ -20,65 +21,37 @@ provider:
       Resource:
         - "arn:aws:s3:::"
 
-
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
-
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
-
-# you can add packaging information here
-#package:
-#  patterns:
-#    - '!exclude-me.js'
-#    - '!exclude-me-dir/**'
-#    - include-me.js
-#    - include-me-dir/**
-
 functions:
+  functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+      
+  listAllFuncionarios:
+    handler: index.handler
+    events:
+      - http: 'GET /funcionario/list'
+
   insertFuncionario:
-    handler: src/controllers/Funcionario.insert
+    handler: index.handler
     events:
-      - http:
-          path: funcionarios
-          method: post
+      - http: 'POST /funcionario'
 
-  listAllFuncionario:
-    handler: src/controllers/Funcionario.listAll
+  deleteFuncionario:
+    handler: index.handler
     events:
-      - http:
-          path: funcionarios
-          method: get
-
-  removeFuncionario:
-    handler: src/controllers/Funcionario.remove
-    events:
-      - http:
-          path: funcionarios/{id}
-          method: delete
+      - http: 'DELETE /funcionario/{proxy+}'
 
   updateFuncionario:
-    handler: src/controllers/Funcionario.update
+    handler: index.handler
     events:
-      - http:
-          path: funcionarios
-          method: put
+      - http: 'PUT /funcionario/{proxy+}'
+
+
+  listAllFuncionariostest:
+    handler: index.handler
+    events:
+      - http: 'GET /funcionario'
 
