@@ -2,7 +2,7 @@
 my-api-test
 Para rodar local 
 - clone o repo no seu computador
-- rode npm i no prompt
+- rode npm install no prompt
 - npm start 
 Para rodar os test 
 - npm run test
